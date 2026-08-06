@@ -1,0 +1,10 @@
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.12
+PyJWT>=2.9.0
+cachetools>=5.5.0
+slowapi>=0.1.9
+Pillow>=10.4.0
+pydantic>=2.9.0
+# NeMo ASR (CUDA 13 / torch cu132) — install separately:
+#   pip install "nemo-toolkit[asr,cu13]" --extra-index-url https://download.pytorch.org/whl/cu132

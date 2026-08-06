@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jos</title>
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=splinesansmono@400,500&display=swap"
+    />
+    <link rel="stylesheet" href="/static/css/app.css" />
+  </head>
+  <body>
+    <section id="gate" class="gate">
+      <div class="gate-rack">
+        <p class="gate-kicker">Program access</p>
+        <h1 class="brand">Jos</h1>
+        <p class="gate-copy">Enter the code for 24 hours on the rack. Drop media after unlock.</p>
+
+        <div id="captcha-frame" class="captcha-frame is-loading" aria-live="polite">
+          <img id="captcha-img" alt="" />
+        </div>
+
+        <form id="captcha-form" class="gate-form" autocomplete="off">
+          <label class="sr-only" for="captcha-answer">Captcha answer</label>
+          <input
+            id="captcha-answer"
+            name="answer"
+            maxlength="10"
+            minlength="4"
+            required
+            placeholder="CODE"
+            inputmode="text"
+            spellcheck="false"
+          />
+          <button class="btn" type="submit">Unlock</button>
+        </form>
+
+        <div class="gate-meta">
+          <p id="captcha-error" class="gate-error" role="alert"></p>
+          <button type="button" class="btn btn-ghost" id="refresh-captcha">Reload</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="app" class="app" hidden>
+      <header class="rack-bar">
+        <div class="rack-id">
+          <span class="lamp" id="model-lamp" title="Model"></span>
+          <strong>Jos</strong>
+          <span class="rack-sub" id="access-pill">24h</span>
+        </div>
+        <p id="status-line" class="status-line" aria-live="polite"></p>
+        <div class="rack-actions">
+          <button type="button" class="btn btn-ghost" id="copy-btn" disabled>Copy</button>
+          <button type="button" class="btn btn-ghost" id="clear-btn">Clear</button>
+          <button type="button" class="btn" id="open-btn">Open</button>
+          <input
+            id="file-input"
+            class="sr-only"
+            type="file"
+            accept="audio/*,video/*,.mp3,.wav,.m4a,.mp4,.mkv,.webm,.mov,.flac,.ogg"
+          />
+        </div>
+      </header>
+
+      <div class="booth">
+        <section class="monitor" id="stage" data-mode="empty">
+          <div class="bezel">
+            <div class="crt">
+              <video
+                id="player-video"
+                playsinline
+                controls
+                controlslist="nofullscreen noremoteplayback"
+                hidden
+              ></video>
+              <audio id="player-audio" controls hidden></audio>
+              <div id="caption-burn" class="caption-burn" hidden></div>
+              <button type="button" class="fs-btn" id="fs-btn" hidden>Maximize</button>
+              <div id="drop" class="drop-layer" tabindex="0" role="button" aria-label="Open media file">
+                <p class="drop-title">Drop or click to open</p>
+                <p class="drop-hint">Cuts wait for a real pause. Use Maximize for fullscreen captions.</p>
+              </div>
+            </div>
+            <div class="lower-third">
+              <span id="timecode" class="timecode">0:00 / 0:00</span>
+              <span id="prog-meta" class="prog-meta">READY</span>
+            </div>
+          </div>
+          <div class="meter" aria-hidden="true">
+            <div id="meter-fill" class="meter-fill"></div>
+          </div>
+        </section>
+
+        <aside class="cue-panel">
+          <div class="cue-head">
+            <h2>Captions</h2>
+            <span id="cue-count">0</span>
+          </div>
+          <ol id="cue-list" class="cue-list"></ol>
+          <p id="full-text" class="sr-only"></p>
+        </aside>
+      </div>
+    </div>
+
+    <script type="module" src="/static/js/app.js"></script>
+  </body>
+</html>
